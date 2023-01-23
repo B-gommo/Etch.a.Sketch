@@ -17,9 +17,17 @@ main {
     background-color: burlywood;
 }
 
+div p {
+    text-align: center;
+}
+
 .controlBtns {
     width: 300px;
     border-radius: 25px;
+}
+
+.slider {
+
 }
 
 #frame {
@@ -110,6 +118,10 @@ main {
     
     #controls {
         height: 160px;
+    }
+
+    div p {
+        display: none;
     }
     
 }

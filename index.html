@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,22 +8,28 @@
     <link rel="stylesheet" href="./styles.css" type="text/css">
     <script type="text/javascript" src="./scripts.js" defer></script>
 </head>
+
 <body>
-    <header><h1>Etch a Sketch</h1></header>
+    <header>
+        <h1>Etch a Sketch</h1>
+    </header>
     <main>
         <div id="frame">
             <div id="canvas"></div>
             <div id="controls">
-                <button class="controlBtns">Color picker</button>
+                <button class="controlBtns">Color</button>
                 <button class="controlBtns">Darken</button>
                 <button class="controlBtns">Lighten</button>
                 <button class="controlBtns">Rainbow</button>
                 <button class="controlBtns">Erase</button>
                 <button class="controlBtns">Reset</button>
-                <input class="controlBtns" type="range" min="10" max="100" value="1">
+                <div>
+                    <p>Grid size: <span class="firstOutput"></span> x <span class="secondOutput"></span></p>
+                    <input class="controlBtns slider" type="range" min="10" max="100" value="50" step="2" class="slider" id="myRange">
+                </div>    
             </div>
         </div>
     </main>
-    
 </body>
+
 </html>
