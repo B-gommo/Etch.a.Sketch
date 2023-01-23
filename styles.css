@@ -51,6 +51,7 @@ div p {
     background-color: white;
     margin-left: 50px;
     border-radius: 25px;
+    overflow: hidden;
 }
 
 #controls {
