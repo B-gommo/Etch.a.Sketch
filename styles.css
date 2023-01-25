@@ -24,6 +24,7 @@ div p {
 #canvas div {
     border-top: 1px solid gray;
     border-left: 1px solid gray;
+    user-select: none;
 }
 
 .controlBtns {

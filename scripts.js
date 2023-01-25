@@ -1,3 +1,5 @@
+let color = 'black';
+
 const myRange = document.querySelector("#myRange");
 const sliderOutput = document.querySelector(".firstOutput");
 const sliderOutputTwo = document.querySelector(".secondOutput");
@@ -13,7 +15,7 @@ function fillGrid() {
         const cell = document.createElement("div");
         cell.addEventListener('mouseover', backgroundColor);
         cell.addEventListener('mousedown', backgroundColor);
-        cell.setAttribute('draggable', 'false');
+        /*cell.setAttribute('draggable', 'false');*/
         canvas.appendChild(cell);
     }
 }
@@ -25,7 +27,7 @@ document.body.onmouseup = () => (mouseDown = false);
 function backgroundColor(e) {
     if (e.type === 'mouseover' && !mouseDown) return;
     else{
-    e.target.style.backgroundColor = 'black';
+    e.target.style.backgroundColor = color;
     }
 }
 
@@ -44,3 +46,13 @@ myRange.oninput = function () {
     canvas.style.gridTemplate = `repeat(${myRange.value},1fr)/repeat(${myRange.value},1fr)`;
     fillGrid();
 }
+
+const colorBtn = document.getElementById('colorBtn').onchange =e=>{
+    color = e.target.value;
+}
+
+const darkenBtn = document.getElementById('darkenBtn');
+const lightenBtn = document.getElementById('lightenBtn');
+const rainbowBtn = document.getElementById('rainbowBtn');
+const eraserBtn = document.getElementById('eraserBtn');
+const clearBtn = document.getElementById('clearBtn');
