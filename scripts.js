@@ -11,7 +11,7 @@ canvas.style.cssText = `display: grid; grid-template: repeat(${myRange.value},1f
 
 function fillGrid() {
     const gridResult = `${myRange.value}` * `${myRange.value}`
-    for (let gridLines = 1; gridLines<=gridResult; gridLines++) {
+    for (let gridLines = 1; gridLines <= gridResult; gridLines++) {
         const cell = document.createElement("div");
         cell.addEventListener('mouseover', backgroundColor);
         cell.addEventListener('mousedown', backgroundColor);
@@ -26,15 +26,15 @@ document.body.onmouseup = () => (mouseDown = false);
 
 function backgroundColor(e) {
     if (e.type === 'mouseover' && !mouseDown) return;
-    else{
-    e.target.style.backgroundColor = color;
+    else {
+        e.target.style.backgroundColor = color;
     }
 }
 
 fillGrid();
 
 function clearCanvas() {
-    canvas.innerHTML ='';
+    canvas.innerHTML = '';
 }
 
 canvas.style.cssText = `display: grid; grid-template: repeat(${myRange.value},1fr)/repeat(${myRange.value},1fr)`;
@@ -47,9 +47,32 @@ myRange.oninput = function () {
     fillGrid();
 }
 
-const colorBtn = document.getElementById('colorBtn').onchange =e=>{
+const colorBtn = document.getElementById('colorBtn').onchange = e => {
     color = e.target.value;
+    document.querySelectorAll('button').forEach(btn => {
+            btn.classList.remove('active');
+    })
 }
+
+let prevBtn = null;
+
+document.querySelectorAll('button').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+        e.target.classList.toggle('active');
+        if (prevBtn !== null && prevBtn !== e.target) {
+            prevBtn.classList.remove('active');
+        }
+        if (e.target.classList.contains('active') && eraserBtn) {
+            color = 'white';
+        } else {
+            const oldColor = document.getElementById('colorBtn').value;
+            color = oldColor;
+        }
+        prevBtn = e.target;
+
+    })
+})
+
 
 const darkenBtn = document.getElementById('darkenBtn');
 const lightenBtn = document.getElementById('lightenBtn');
