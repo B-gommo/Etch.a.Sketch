@@ -62,11 +62,15 @@ document.querySelectorAll('button').forEach(btn => {
         if (prevBtn !== null && prevBtn !== e.target) {
             prevBtn.classList.remove('active');
         }
-        if (e.target.classList.contains('active') && eraserBtn) {
+        if (e.target.classList.contains('active') && e.target === eraserBtn) {
             color = 'white';
         } else {
             const oldColor = document.getElementById('colorBtn').value;
             color = oldColor;
+        } if (e.target.classList.contains('active') && e.target === clearBtn) {
+            clearCanvas();
+            fillGrid();
+            e.target.classList.remove('active');
         }
         prevBtn = e.target;
 
