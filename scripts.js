@@ -38,8 +38,8 @@ function backgroundColor(e) {
     if (mode === 'darken') {
         console.log(e.target.dataset.percent);
         let rbgPercent = parseInt(e.target.dataset.percent);
-        if (rbgPercent >= 20) {
-            rbgPercent -= 20;
+        if (rbgPercent >= 10) {
+            rbgPercent -= 10;
             e.target.dataset.percent = rbgPercent;
         }
         let rgbColor = `rgb(${rbgPercent}%,${rbgPercent}%,${rbgPercent}%)`
@@ -51,7 +51,7 @@ function backgroundColor(e) {
         if (rbgPercent === 100) { 
             return;
         } else if (rbgPercent >= 0) {
-            rbgPercent += 20;
+            rbgPercent += 10;
             e.target.dataset.percent = rbgPercent;
         }
         let rgbColor = `rgb(${rbgPercent}%,${rbgPercent}%,${rbgPercent}%)`

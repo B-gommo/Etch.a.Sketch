@@ -10,7 +10,9 @@ body {
     box-sizing: border-box;
     margin: 0;
     height: 100vh;
+    background-image: url(./img/pixel.png);
     background-color: var(--color1);
+    background-blend-mode: screen;
 }
 
 header {
@@ -22,7 +24,6 @@ main {
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
-    background-color: var(--color1);
 }
 
 h1,
