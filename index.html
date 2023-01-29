@@ -6,6 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Etch a Sketch</title>
     <link rel="stylesheet" href="./styles.css" type="text/css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sonsie+One&display=swap" rel="stylesheet">
     <script type="text/javascript" src="./scripts.js" defer></script>
 </head>
 
@@ -17,16 +20,25 @@
         <div id="frame">
             <div id="canvas"></div>
             <div id="controls">
-                <input id="colorBtn" class="controlBtns" type="color" value="#000000">
-                <button id='darkenBtn'class="controlBtns">Darken</button>
-                <button id='lightenBtn'class="controlBtns">Lighten</button>
-                <button id='rainbowBtn'class="controlBtns">Rainbow</button>
-                <button id='eraserBtn'class="controlBtns">Eraser</button>
-                <button id='clearBtn'class="controlBtns">Clear</button>
-                <div>
-                    <p>Grid size: <span class="firstOutput"></span> x <span class="secondOutput"></span></p>
-                    <input class="controlBtns slider" type="range" min="10" max="60" value="15" step="5" class="slider" id="myRange">
-                </div>    
+                <div class="controls-upper">
+                    <div id='color-wrapper'>
+                        <label class="color-absolute">Color</label>
+                        <input id="color-picker" type="color" value="#000000">
+                    </div>
+                    <button id='darkenBtn' class="controlBtns">Darken</button>
+                    <button id='lightenBtn' class="controlBtns">Lighten</button>
+                    <button id='rainbowBtn' class="controlBtns">Rainbow</button>
+                </div>
+                <div class="controls-lower">
+                    <button id='eraserBtn' class="controlBtns">Eraser</button>
+                    <button id='clearBtn' class="controlBtns">Clear</button>
+                    <button id='gridLines' class="controlBtns">GridLines</button>
+                    <div>
+                        <p>Grid size: <span class="firstOutput"></span> x <span class="secondOutput"></span></p>
+                        <input class="controlBtns" type="range" min="10" max="60" value="15" step="5" class="slider"
+                            id="myRange">
+                    </div>
+                </div>
             </div>
         </div>
     </main>

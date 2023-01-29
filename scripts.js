@@ -6,16 +6,16 @@ const sliderOutputTwo = document.querySelector(".secondOutput");
 sliderOutput.innerHTML = myRange.value;
 sliderOutputTwo.innerHTML = myRange.value;
 
-const colorBtn = document.getElementById('colorBtn');
-colorBtn.classList.add('active');
+const canvas = document.getElementById("canvas");
+canvas.style.cssText = `display: grid; grid-template: repeat(${myRange.value},1fr)/repeat(${myRange.value},1fr)`;
+
+const colorWrapper = document.getElementById('color-wrapper');
+const colorPicker = document.getElementById('color-picker');
 const darkenBtn = document.getElementById('darkenBtn');
 const lightenBtn = document.getElementById('lightenBtn');
 const rainbowBtn = document.getElementById('rainbowBtn');
 const eraserBtn = document.getElementById('eraserBtn');
 const clearBtn = document.getElementById('clearBtn');
-
-const canvas = document.getElementById("canvas");
-canvas.style.cssText = `display: grid; grid-template: repeat(${myRange.value},1fr)/repeat(${myRange.value},1fr)`;
 
 function fillGrid() {
     const gridResult = `${myRange.value}` * `${myRange.value}`
@@ -25,6 +25,7 @@ function fillGrid() {
         cell.addEventListener('mouseover', backgroundColor);
         cell.addEventListener('mousedown', backgroundColor);
         canvas.appendChild(cell);
+        canvas.style.cssText = `display: grid; grid-template: repeat(${myRange.value},1fr)/repeat(${myRange.value},1fr)`;
     }
 }
 
@@ -89,22 +90,18 @@ function clearCanvas() {
     canvas.innerHTML = '';
 }
 
-canvas.style.cssText = `display: grid; grid-template: repeat(${myRange.value},1fr)/repeat(${myRange.value},1fr)`;
-
 myRange.oninput = function () {
     clearCanvas();
     sliderOutput.innerHTML = myRange.value;
     sliderOutputTwo.innerHTML = myRange.value;
-    canvas.style.gridTemplate = `repeat(${myRange.value},1fr)/repeat(${myRange.value},1fr)`;
     fillGrid();
 }
 
 let mode = 'draw';
 
-const colorInput = document.getElementById('colorBtn').onchange = e => {
+colorPicker.onchange = e => {
     color = e.target.value;
-    colorBtn.classList.add('active');
-    prevBtn = colorBtn;
+    colorWrapper.style.backgroundColor = e.target.value;
     document.querySelectorAll('button').forEach(btn => {
         btn.classList.remove('active');
         mode = 'draw';
@@ -117,13 +114,12 @@ rainbowBtn.onclick = () => mode = 'rainbow';
 eraserBtn.onclick = () => mode = 'eraser';
 clearBtn.onclick = () => mode = 'clear';
 
-let prevBtn = colorBtn;
+let prevBtn = null;
 
 const activeBtn = document.querySelectorAll('button');
 activeBtn.forEach(btn => {
     btn.addEventListener('click', (e) => {
         e.target.classList.add('active');
-        const darkCells = document.querySelectorAll('#canvas div');
         if (prevBtn !== null && prevBtn !== e.target) {
             prevBtn.classList.remove('active');
         }
