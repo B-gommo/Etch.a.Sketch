@@ -16,6 +16,7 @@ const lightenBtn = document.getElementById('lightenBtn');
 const rainbowBtn = document.getElementById('rainbowBtn');
 const eraserBtn = document.getElementById('eraserBtn');
 const clearBtn = document.getElementById('clearBtn');
+const gridLines = document.getElementById('gridLines');
 
 function fillGrid() {
     const gridResult = `${myRange.value}` * `${myRange.value}`
@@ -48,7 +49,7 @@ function backgroundColor(e) {
         }
     } else if (mode === 'lighten') {
         let rbgPercent = parseInt(e.target.dataset.percent);
-        if (rbgPercent === 100) { 
+        if (rbgPercent === 100) {
             return;
         } else if (rbgPercent >= 0) {
             rbgPercent += 10;
@@ -58,7 +59,7 @@ function backgroundColor(e) {
         if (e.target !== canvas) {
             e.target.style['background'] = rgbColor;
         }
-    } else if (mode === 'rainbow'){
+    } else if (mode === 'rainbow') {
         changeColor();
         e.target.style.backgroundColor = color;
         rbgPercent = 60;
@@ -72,16 +73,16 @@ function backgroundColor(e) {
 
 fillGrid();
 
-function getRandomColor(){
+function getRandomColor() {
     let letters = '0123456789ABCDEF';
     let colors = '#';
-    for (let i=0; i < 6; i++){
+    for (let i = 0; i < 6; i++) {
         colors += letters[Math.floor(Math.random() * 16)];
     }
     return colors;
 }
 
-function changeColor(){
+function changeColor() {
     let newColor = getRandomColor();
     color = newColor;
 }
@@ -113,29 +114,61 @@ lightenBtn.onclick = () => mode = 'lighten';
 rainbowBtn.onclick = () => mode = 'rainbow';
 eraserBtn.onclick = () => mode = 'eraser';
 clearBtn.onclick = () => mode = 'clear';
+/*gridLines.onclick = () => mode = 'gridLines';*/
 
 let prevBtn = null;
 
 const activeBtn = document.querySelectorAll('button');
 activeBtn.forEach(btn => {
     btn.addEventListener('click', (e) => {
-        e.target.classList.add('active');
         if (prevBtn !== null && prevBtn !== e.target) {
             prevBtn.classList.remove('active');
         }
-        if (mode === 'darken') {
+        if (e.target === gridLines) {
+            if (e.target.classList.contains('active')) {
+                removeGridLines();
+                e.target.classList.remove('active');
+                prevBtn.classList.add('active');
+            } else {
+                addGridLines()
+                e.target.classList.add('active');
+                prevBtn.classList.add('active');
+            }
+        } else if (mode === 'darken') {
+            e.target.classList.add('active');
             prevBtn = darkenBtn
         } else if (mode === 'lighten') {
+            e.target.classList.add('active');
             prevBtn = lightenBtn
         } else if (mode === 'rainbow') {
+            e.target.classList.add('active');
             prevBtn = rainbowBtn
         } else if (mode === 'eraser') {
+            e.target.classList.add('active');
             prevBtn = eraserBtn
             color = 'white';
         } else if (mode === 'clear') {
+            e.target.classList.add('active');
             clearCanvas();
             fillGrid();
             prevBtn = clearBtn
+
         }
     })
 })
+
+function removeGridLines() {
+    const cells = document.querySelectorAll('#canvas div');
+    cells.forEach(cell => {
+        cell.style.borderTop = 'none';
+        cell.style.borderLeft = 'none';
+    })
+}
+
+function addGridLines() {
+    const cells = document.querySelectorAll('#canvas div');
+    cells.forEach(cell => {
+        cell.style.borderTop = '1px solid grey';
+        cell.style.borderLeft = '1px solid grey';
+    })
+}
