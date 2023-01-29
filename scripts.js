@@ -60,9 +60,11 @@ function backgroundColor(e) {
     } else if (mode === 'rainbow'){
         changeColor();
         e.target.style.backgroundColor = color;
+        rbgPercent = 60;
+        e.target.dataset.percent = rbgPercent;
     } else {
         e.target.style.backgroundColor = color;
-        rbgPercent = 0;
+        rbgPercent = 60;
         e.target.dataset.percent = rbgPercent;
     }
 }
