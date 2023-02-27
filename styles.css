@@ -158,6 +158,10 @@ button {
         width: 125px;
     }
 
+    #color-picker {
+        width: 125px;
+    }
+
     #frame {
         width: 500px;
         height: 350px;
@@ -214,6 +218,10 @@ button {
     #color-wrapper {
         width: 116px;
 
+    }
+
+    #color-picker {
+        width: 120px;
     }
 
     .color-absolute {
