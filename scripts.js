@@ -103,22 +103,20 @@ colorPicker.onchange = e => {
     color = e.target.value;
     colorWrapper.style.backgroundColor = e.target.value;
     document.querySelectorAll('button').forEach(btn => {
-        btn.classList.remove('active');
-        mode = 'draw';
+        if (btn !== gridLines) {
+            btn.classList.remove('active');
+            mode = 'draw';
+        }
     })
 }
-
-let prevBtn = null;
 
 darkenBtn.onclick = () => mode = 'darken';
 lightenBtn.onclick = () => mode = 'lighten';
 rainbowBtn.onclick = () => mode = 'rainbow';
 eraserBtn.onclick = () => mode = 'eraser';
 clearBtn.onclick = () => mode = 'clear';
-colorWrapper.addEventListener('click', function() {
-    prevBtn = colorWrapper
-})
-/*gridLines.onclick = () => mode = 'gridLines';*/
+
+let prevBtn = null;
 
 const activeBtn = document.querySelectorAll('button');
 activeBtn.forEach(btn => {
@@ -130,11 +128,19 @@ activeBtn.forEach(btn => {
             if (e.target.classList.contains('active')) {
                 removeGridLines();
                 e.target.classList.remove('active');
-                prevBtn.classList.add('active');
+                if (prevBtn === null) {
+                    return;
+                } else {
+                    prevBtn.classList.add('active');
+                }
             } else {
                 addGridLines()
                 e.target.classList.add('active');
-                prevBtn.classList.add('active');
+                if (prevBtn === null) {
+                    return;
+                } else {
+                    prevBtn.classList.add('active');
+                }
             }
         } else if (mode === 'darken') {
             e.target.classList.add('active');
@@ -154,7 +160,9 @@ activeBtn.forEach(btn => {
             clearCanvas();
             fillGrid();
             prevBtn = clearBtn
-
+        } else if (mode === 'draw') {
+            e.target.classList.add('active');
+            prevBtn = colorWrapper
         }
     })
 })
