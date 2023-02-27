@@ -37,7 +37,6 @@ document.body.onmouseup = () => (mouseDown = false);
 function backgroundColor(e) {
     if (e.type === 'mouseover' && !mouseDown) return;
     if (mode === 'darken') {
-        console.log(e.target.dataset.percent);
         let rbgPercent = parseInt(e.target.dataset.percent);
         if (rbgPercent >= 10) {
             rbgPercent -= 10;
@@ -109,14 +108,17 @@ colorPicker.onchange = e => {
     })
 }
 
+let prevBtn = null;
+
 darkenBtn.onclick = () => mode = 'darken';
 lightenBtn.onclick = () => mode = 'lighten';
 rainbowBtn.onclick = () => mode = 'rainbow';
 eraserBtn.onclick = () => mode = 'eraser';
 clearBtn.onclick = () => mode = 'clear';
+colorWrapper.addEventListener('click', function() {
+    prevBtn = colorWrapper
+})
 /*gridLines.onclick = () => mode = 'gridLines';*/
-
-let prevBtn = null;
 
 const activeBtn = document.querySelectorAll('button');
 activeBtn.forEach(btn => {
